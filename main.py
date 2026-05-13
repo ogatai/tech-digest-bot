@@ -1,3 +1,4 @@
+from export_html import export_html
 from database import init_db, save_article
 import feedparser
 import yaml
@@ -43,6 +44,8 @@ def main():
 
     for feed in feeds:
         fetch_articles(feed)
+
+    export_html()
 
 
 if __name__ == "__main__":
