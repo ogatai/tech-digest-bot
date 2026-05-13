@@ -1,17 +1,29 @@
 import feedparser
+import yaml
 
-RSS_URL = "https://techcrunch.com/feed/"
+
+def load_feeds():
+    with open("config/feeds.yaml", "r", encoding="utf-8") as f:
+        config = yaml.safe_load(f)
+    return config["rss"]
 
 
-def fetch_articles():
-    feed = feedparser.parse(RSS_URL)
+def fetch_articles(feed):
+    print()
+    print(f"=== {feed['name']} ===")
 
-    print("TechCrunch の最新記事")
-    print("-" * 30)
+    parsed = feedparser.parse(feed["url"])
 
-    for entry in feed.entries[:10]:
+    for entry in parsed.entries[:5]:
         print(f"- {entry.title}")
 
 
+def main():
+    feeds = load_feeds()
+
+    for feed in feeds:
+        fetch_articles(feed)
+
+
 if __name__ == "__main__":
-    fetch_articles()
+    main()

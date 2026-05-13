@@ -1,0 +1,12 @@
+rss:
+  - name: TechCrunch
+    url: https://techcrunch.com/feed/
+
+  - name: AWS News
+    url: https://aws.amazon.com/blogs/aws/feed/
+
+  - name: Azure Updates
+    url: https://azure.microsoft.com/en-us/updates/feed/
+
+  - name: Zenn
+    url: https://zenn.dev/feed
