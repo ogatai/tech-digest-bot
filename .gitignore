@@ -8,3 +8,6 @@ wheels/
 
 # Virtual environments
 .venv
+# 自動生成されるファイル（←メモ書きなので無くてもOK）
+data/news.db
+output/index.html
