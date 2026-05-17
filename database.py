@@ -17,7 +17,9 @@ def init_db():
             title TEXT NOT NULL,
             url TEXT UNIQUE NOT NULL,
             source TEXT NOT NULL,
-            published TEXT
+            published TEXT,
+            content TEXT,
+            summary TEXT
         )
     """)
 
@@ -25,15 +27,15 @@ def init_db():
     conn.close()
 
 
-def save_article(title, url, source, published):
+def save_article(title, url, source, published, content, summary):
     conn = get_connection()
     cursor = conn.cursor()
 
     try:
         cursor.execute("""
-            INSERT INTO articles (title, url, source, published)
-            VALUES (?, ?, ?, ?)
-        """, (title, url, source, published))
+            INSERT INTO articles (title, url, source, published, content, summary)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (title, url, source, published, content, summary))
 
         conn.commit()
         return True

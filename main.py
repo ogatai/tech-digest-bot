@@ -1,3 +1,5 @@
+from summarizer import summarize_japanese
+from article_fetcher import fetch_article_text
 from export_html import export_html
 from database import init_db, save_article
 import feedparser
@@ -22,14 +24,20 @@ def fetch_articles(feed):
 
     saved_count = 0
 
-    for entry in parsed.entries[:5]:
+    for entry in parsed.entries[:2]:
         print(f"- {entry.title}")
+
+        content = fetch_article_text(entry.link)
+
+        summary = summarize_japanese(content)
 
         saved = save_article(
             title=entry.title,
             url=entry.link,
             source=feed["name"],
-            published=getattr(entry, "published", "")
+            published=getattr(entry, "published", ""),
+            content=content,
+            summary=summary
         )
 
         if saved:

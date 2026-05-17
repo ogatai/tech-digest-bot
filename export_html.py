@@ -9,7 +9,7 @@ def export_html():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT source, title, url
+        SELECT source, title, url, content, summary
         FROM articles
         ORDER BY id DESC
         LIMIT 50
@@ -57,11 +57,13 @@ def export_html():
 </head>
 <body>
 """
-    for source, title, url in rows:
+    for source, title, url, content, summary in rows:
         html += f"""
         <li>
             <b>{source}</b><br>
             <a href="{url}" target="_blank">{title}</a>
+            <p>{content[:300]}...</p>
+            <p>{summary}</p>
         </li>
         <br>
         """
